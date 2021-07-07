@@ -87,7 +87,7 @@ end
 
 function checkinit_hook() return 0 end
 
-local function rewrite(source,result,processor,...)
+function rewrite(source,result,processor,...)
   local file = assert(open(source,"rb"))
   local content = gsub(file:read("*all") .. "\n","\r\n","\n")
   close(file)
@@ -100,7 +100,7 @@ end
 
 -- Convert the raw log file into one for comparison/storage: keeps only
 -- the 'business' part from the tests and removes system-dependent stuff
-local function normalize_log(content,engine,errlevels)
+function normalize_log(content,engine,errlevels)
   local maxprintline = maxprintline
   if (match(engine,"^lua") or match(engine,"^harf")) and luatex_version < 113 then
     maxprintline = maxprintline + 1 -- Deal with an out-by-one error
